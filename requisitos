@@ -1,0 +1,12 @@
+Package       Version
+------------- -------
+click         7.1.2  
+fastapi       0.61.2 
+h11           0.11.0 
+pip           20.0.2 
+pkg-resources 0.0.0  
+pydantic      1.7.2  
+setuptools    44.0.0 
+starlette     0.13.6 
+uvicorn       0.12.2 
+uvloop        0.14.0 
