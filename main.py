@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from fastapi import Depends, FastAPI, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from fastapi.responses import RedirectResponse
 
 #PARA INICIAR: uvicorn main:app --reload
 
@@ -20,7 +21,14 @@ class url(BaseModel):
 """
 Shortener de URLS
 """
-#
+#Función en la que metes el value y diccionario y te devuelve el Key que lo contiene
+def conversor_short(dictio , short):
+    for i in dictio:
+        if dictio[i] == short:
+            return i
+
+
+#Funcion Root
 @app.post("/")
 async def root():
     return {"message":"Hito 1-2, API de shortener."}
@@ -40,3 +48,10 @@ async def register_url(url_id, url_short):
 @app.get("/registered_URLS")
 async def urls_registered():
     return urls
+
+@app.get("/redirect/{url_short}")
+async def redirect(parameter_list):
+    if parameter_list in urls.values():
+        return RedirectResponse(conversor_short(urls,parameter_list))
+    else:
+        print("No existe ese short")
